@@ -1,0 +1,12 @@
+[
+    {
+        "id":1,
+        "FIO": ["Amirov Said"],
+        "Married": true
+    },
+    {
+        "id":2,
+        "FIO": ["Magomedov Magomed"],
+        "Married": false
+    }
+]

@@ -1,0 +1,41 @@
+!DOCTYPE html
+html
+head
+    titleЗагрузка файла в Miniotitle
+    script src=httpscdn.jsdelivr.netnpmminio-browserdistminio-browser.jsscript
+head
+body
+    h1Загрузка файла в Minioh1
+
+    input type=file id=fileInput 
+    button onclick=uploadFile()Загрузитьbutton
+
+    script
+        var minioClient = new Minio.Client({
+            endPoint 'minio.example.com',
+            port 9000,
+            useSSL false,
+            accessKey 'YOUR_ACCESS_KEY',
+            secretKey 'YOUR_SECRET_KEY'
+        });
+
+        function uploadFile() {
+            var fileInput = document.getElementById('fileInput');
+            var file = fileInput.files[0];
+
+            var metaData = {
+                'Content-Type' file.type  'applicationoctet-stream',
+                'X-Amz-Meta-Testing' 1234,
+                'example' 5678
+            };
+
+            minioClient.fPutObject('bucketName', file.name, file, metaData, function(error, etag) {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Файл успешно загружен', etag);
+            });
+        }
+    script
+body
+html
